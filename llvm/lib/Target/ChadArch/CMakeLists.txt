@@ -1,7 +1,14 @@
 add_llvm_component_group(ChadArch)
 
+set(LLVM_TARGET_DEFINITIONS ChadArch.td)
+
+tablegen(LLVM ChadArchGenRegisterInfo.inc -gen-register-info)
+
+add_public_tablegen_target(ChadArchCommonTableGen)
+
 add_llvm_target(ChadArchCodeGen
   ChadArchTargetMachine.cpp
+  ChadArchRegisterInfo.cpp
 
   LINK_COMPONENTS
   CodeGen
