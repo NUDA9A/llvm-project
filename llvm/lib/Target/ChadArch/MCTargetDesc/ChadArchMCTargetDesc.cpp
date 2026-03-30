@@ -3,6 +3,7 @@
 #include "TargetInfo/ChadArchTargetInfo.h"
 #include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
+#include "llvm/MC/MCSubtargetInfo.h"
 #include "llvm/MC/TargetRegistry.h"
 
 using namespace llvm;
@@ -13,11 +14,20 @@ using namespace llvm;
 #define GET_INSTRINFO_MC_DESC
 #include "ChadArchGenInstrInfo.inc"
 
+#define GET_SUBTARGETINFO_MC_DESC
+#include "ChadArchGenSubtargetInfo.inc"
+
 static MCRegisterInfo *createChadArchMCRegisterInfo(const Triple &TT) {
   CHADARCH_DUMP_MAGENTA
   MCRegisterInfo *X = new MCRegisterInfo();
   InitChadArchMCRegisterInfo(X, ChadArch::R0);
   return X;
+}
+
+static MCSubtargetInfo *
+createChadArchMCSubtargetInfo(const Triple &TT, StringRef CPU, StringRef FS) {
+  CHADARCH_DUMP_MAGENTA
+  return createChadArchMCSubtargetInfoImpl(TT, CPU, CPU, FS);
 }
 
 static MCInstrInfo *createChadArchMCInstrInfo() {
@@ -35,4 +45,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeChadArchTargetMC() {
                                     createChadArchMCRegisterInfo);
   TargetRegistry::RegisterMCInstrInfo(TheChadArchTarget,
                                       createChadArchMCInstrInfo);
+  TargetRegistry::RegisterMCSubtargetInfo(TheChadArchTarget,
+                                          createChadArchMCSubtargetInfo);
 }
