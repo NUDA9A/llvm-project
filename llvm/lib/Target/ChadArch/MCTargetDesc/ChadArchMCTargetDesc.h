@@ -4,4 +4,7 @@
 #define GET_REGINFO_ENUM
 #include "ChadArchGenRegisterInfo.inc"
 
+#define GET_INSTRINFO_ENUM
+#include "ChadArchGenInstrInfo.inc"
+
 #endif // LLVM_LIB_TARGET_CHADARCH_MCTARGETDESC_CHADARCHMCTARGETDESC_H

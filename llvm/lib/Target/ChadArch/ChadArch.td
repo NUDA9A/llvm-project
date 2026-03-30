@@ -1,4 +1,8 @@
 include "llvm/Target/Target.td"
 include "ChadArchRegisterInfo.td"
+include "ChadArchInstrInfo.td"
 
-def ChadArch : Target;
+def ChadArchInstrInfo : InstrInfo;
+def ChadArch : Target {
+    let InstructionSet = ChadArchInstrInfo;
+}
