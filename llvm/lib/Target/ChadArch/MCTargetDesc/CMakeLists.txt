@@ -1,6 +1,7 @@
 add_llvm_component_library(LLVMChadArchDesc
   ChadArchMCTargetDesc.cpp
   ChadArchMCAsmInfo.cpp
+  ChadArchInstPrinter.cpp
 
   LINK_COMPONENTS
   MC
