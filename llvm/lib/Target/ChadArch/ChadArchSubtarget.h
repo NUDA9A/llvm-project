@@ -2,6 +2,7 @@
 #define LLVM_LIB_TARGET_CHADARCH_CHADARCHSUBTARGET_H
 
 #include "ChadArch.h"
+#include "ChadArchFrameLowering.h"
 #include "ChadArchISelLowering.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
@@ -12,6 +13,7 @@ namespace llvm {
 
 class ChadArchSubtarget : public ChadArchGenSubtargetInfo {
   ChadArchTargetLowering TLInfo;
+  ChadArchFrameLowering FrameLowering;
 
 public:
   ChadArchSubtarget(const Triple &TT, const std::string &CPU,
@@ -24,6 +26,11 @@ public:
   const ChadArchTargetLowering *getTargetLowering() const override {
     CHADARCH_DUMP_CYAN
     return &TLInfo;
+  }
+
+  const ChadArchFrameLowering *getFrameLowering() const override {
+    CHADARCH_DUMP_CYAN
+    return &FrameLowering;
   }
 };
 
