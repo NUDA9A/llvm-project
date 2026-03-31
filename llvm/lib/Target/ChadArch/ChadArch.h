@@ -23,6 +23,20 @@
 namespace llvm {
 class ChadArchTargetMachine;
 class FunctionPass;
+class ChadArchSubtarget;
+class AsmPrinter;
+class InstructionSelector;
+class MCInst;
+class MCOperand;
+class MachineInstr;
+class MachineOperand;
+class PassRegistry;
+
+bool lowerChadArchMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
+                                       AsmPrinter &AP);
+bool LowerChadArchMachineOperandToMCOperand(const MachineOperand &MO,
+                                            MCOperand &MCOp,
+                                            const AsmPrinter &AP);
 
 FunctionPass *createChadArchISelDag(ChadArchTargetMachine &TM,
                                     CodeGenOptLevel OptLevel);

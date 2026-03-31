@@ -20,6 +20,7 @@ add_llvm_target(ChadArchCodeGen
   ChadArchAsmPrinter.cpp
   ChadArchISelDagToDag.cpp
   ChadArchISelLowering.cpp
+  ChadArchMCInstLower.cpp
 
   LINK_COMPONENTS
   CodeGen

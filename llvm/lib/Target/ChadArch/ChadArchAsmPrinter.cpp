@@ -37,6 +37,10 @@ public:
   StringRef getPassName() const override { return "ChadArch Assembly Printer"; }
 
   bool lowerPseudoInstExpansion(const MachineInstr *MI, MCInst &Inst);
+
+  bool lowerOperand(const MachineOperand &MO, MCOperand &MCOp) const {
+    return LowerChadArchMachineOperandToMCOperand(MO, MCOp, *this);
+  }
 };
 } // namespace
 
@@ -49,6 +53,10 @@ void ChadArchAsmPrinter::emitInstruction(const MachineInstr *MI) {
     EmitToStreamer(*OutStreamer, OutInst);
     return;
   }
+
+  MCInst TmpInst;
+  if (!lowerChadArchMachineInstrToMCInst(MI, TmpInst, *this))
+    EmitToStreamer(*OutStreamer, TmpInst);
 }
 
 // Force static initialization.
