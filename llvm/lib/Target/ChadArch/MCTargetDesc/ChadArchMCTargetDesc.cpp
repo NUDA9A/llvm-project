@@ -1,4 +1,5 @@
 #include "ChadArch.h"
+#include "ChadArchInstPrinter.h"
 #include "ChadArchMCAsmInfo.h"
 #include "MCTargetDesc/ChadArchInfo.h"
 #include "TargetInfo/ChadArchTargetInfo.h"
@@ -44,6 +45,15 @@ static MCAsmInfo *createChadArchMCAsmInfo(const MCRegisterInfo &MRI,
   return MAI;
 }
 
+static MCInstPrinter *createChadArchMCInstPrinter(const Triple &T,
+                                                  unsigned SyntaxVariant,
+                                                  const MCAsmInfo &MAI,
+                                                  const MCInstrInfo &MII,
+                                                  const MCRegisterInfo &MRI) {
+  CHADARCH_DUMP_MAGENTA
+  return new ChadArchInstPrinter(MAI, MII, MRI);
+}
+
 static MCInstrInfo *createChadArchMCInstrInfo() {
   CHADARCH_DUMP_MAGENTA
   MCInstrInfo *X = new MCInstrInfo();
@@ -62,4 +72,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeChadArchTargetMC() {
                                       createChadArchMCInstrInfo);
   TargetRegistry::RegisterMCSubtargetInfo(TheChadArchTarget,
                                           createChadArchMCSubtargetInfo);
+  TargetRegistry::RegisterMCInstPrinter(TheChadArchTarget,
+                                        createChadArchMCInstPrinter);
 }
