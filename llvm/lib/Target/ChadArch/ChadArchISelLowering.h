@@ -22,6 +22,20 @@ enum NodeType : unsigned {
 
 } // namespace ChadArchISD
 
+class ChadArchTargetLowering : public TargetLowering {
+public:
+  explicit ChadArchTargetLowering(const TargetMachine &TM,
+                                  const ChadArchSubtarget &STI);
+
+  /// This method returns the name of a target specific DAG node.
+  const char *getTargetNodeName(unsigned Opcode) const override;
+
+  ChadArchSubtarget const &getSubtarget() const { return STI; }
+
+private:
+  const ChadArchSubtarget &STI;
+};
+
 } // end namespace llvm
 
 #endif // LLVM_LIB_TARGET_CHADARCH_CHADARCHISELLOWERING_H
