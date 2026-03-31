@@ -4,6 +4,7 @@
 #include "ChadArch.h"
 #include "ChadArchFrameLowering.h"
 #include "ChadArchISelLowering.h"
+#include "ChadArchRegisterInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
 #define GET_SUBTARGETINFO_HEADER
@@ -14,6 +15,7 @@ namespace llvm {
 class ChadArchSubtarget : public ChadArchGenSubtargetInfo {
   ChadArchTargetLowering TLInfo;
   ChadArchFrameLowering FrameLowering;
+  ChadArchRegisterInfo RegInfo;
 
 public:
   ChadArchSubtarget(const Triple &TT, const std::string &CPU,
@@ -31,6 +33,10 @@ public:
   const ChadArchFrameLowering *getFrameLowering() const override {
     CHADARCH_DUMP_CYAN
     return &FrameLowering;
+  }
+  const ChadArchRegisterInfo *getRegisterInfo() const override {
+    CHADARCH_DUMP_CYAN
+    return &RegInfo;
   }
 };
 
