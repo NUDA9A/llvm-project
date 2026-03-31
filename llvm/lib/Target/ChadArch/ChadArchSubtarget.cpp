@@ -14,6 +14,6 @@ ChadArchSubtarget::ChadArchSubtarget(const Triple &TT, const std::string &CPU,
                                      const std::string &FS,
                                      const TargetMachine &TM)
     : ChadArchGenSubtargetInfo(TT, CPU, CPU, FS), TLInfo(TM, *this),
-      FrameLowering(*this) {
+      FrameLowering(*this), InstrInfo() {
   CHADARCH_DUMP_CYAN
 }

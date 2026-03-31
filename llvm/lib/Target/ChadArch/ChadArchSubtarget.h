@@ -4,7 +4,9 @@
 #include "ChadArch.h"
 #include "ChadArchFrameLowering.h"
 #include "ChadArchISelLowering.h"
+#include "ChadArchInstrInfo.h"
 #include "ChadArchRegisterInfo.h"
+#include "llvm/CodeGen/SelectionDAGTargetInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
 #define GET_SUBTARGETINFO_HEADER
@@ -16,6 +18,8 @@ class ChadArchSubtarget : public ChadArchGenSubtargetInfo {
   ChadArchTargetLowering TLInfo;
   ChadArchFrameLowering FrameLowering;
   ChadArchRegisterInfo RegInfo;
+  ChadArchInstrInfo InstrInfo;
+  SelectionDAGTargetInfo TSInfo;
 
 public:
   ChadArchSubtarget(const Triple &TT, const std::string &CPU,
@@ -37,6 +41,12 @@ public:
   const ChadArchRegisterInfo *getRegisterInfo() const override {
     CHADARCH_DUMP_CYAN
     return &RegInfo;
+  }
+
+  const ChadArchInstrInfo *getInstrInfo() const override { return &InstrInfo; }
+  const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
+    CHADARCH_DUMP_CYAN
+    return &TSInfo;
   }
 };
 
