@@ -1,6 +1,7 @@
 #include "ChadArchTargetMachine.h"
 #include "ChadArch.h"
 #include "TargetInfo/ChadArchTargetInfo.h"
+#include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/MC/TargetRegistry.h"
 #include <optional>
 
@@ -23,4 +24,23 @@ ChadArchTargetMachine::ChadArchTargetMachine(const Target &T, const Triple &TT,
           Reloc::Static, getEffectiveCodeModel(CM, CodeModel::Small), OL) {
   CHADARCH_DUMP_CYAN
   initAsmInfo();
+}
+
+namespace {
+class ChadArchPassConfig : public TargetPassConfig {
+public:
+  ChadArchPassConfig(ChadArchTargetMachine &TM, PassManagerBase &PM)
+      : TargetPassConfig(TM, PM) {}
+
+  bool addInstSelector() override {
+    CHADARCH_DUMP_CYAN
+    return false;
+  }
+};
+
+} // end anonymous namespace
+
+TargetPassConfig *ChadArchTargetMachine::createPassConfig(PassManagerBase &PM) {
+  CHADARCH_DUMP_CYAN
+  return new ChadArchPassConfig(*this, PM);
 }
