@@ -3,6 +3,7 @@
 
 #include "MCTargetDesc/ChadArchMCTargetDesc.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Target/TargetMachine.h"
 
 #define CHADARCH_DUMP(Color)                                                   \
   {                                                                            \
@@ -18,5 +19,14 @@
 #define CHADARCH_DUMP_CYAN CHADARCH_DUMP(llvm::raw_ostream::CYAN)
 #define CHADARCH_DUMP_MAGENTA CHADARCH_DUMP(llvm::raw_ostream::MAGENTA)
 #define CHADARCH_DUMP_WHITE CHADARCH_DUMP(llvm::raw_ostream::WHITE)
+
+namespace llvm {
+class ChadArchTargetMachine;
+class FunctionPass;
+
+FunctionPass *createChadArchISelDag(ChadArchTargetMachine &TM,
+                                    CodeGenOptLevel OptLevel);
+
+} // namespace llvm
 
 #endif // LLVM_LIB_TARGET_ChadArch_ChadArch_H

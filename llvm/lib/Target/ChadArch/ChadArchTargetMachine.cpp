@@ -32,8 +32,13 @@ public:
   ChadArchPassConfig(ChadArchTargetMachine &TM, PassManagerBase &PM)
       : TargetPassConfig(TM, PM) {}
 
+  ChadArchTargetMachine &getChadArchTargetMachine() const {
+    return getTM<ChadArchTargetMachine>();
+  }
+
   bool addInstSelector() override {
     CHADARCH_DUMP_CYAN
+    addPass(createChadArchISelDag(getChadArchTargetMachine(), getOptLevel());
     return false;
   }
 };
