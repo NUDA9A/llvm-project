@@ -3,6 +3,7 @@ add_llvm_component_library(LLVMChadArchDesc
   ChadArchMCAsmInfo.cpp
   ChadArchInstPrinter.cpp
   ChadArchMCCodeEmitter.cpp
+  ChadArchAsmBackend.cpp
 
   LINK_COMPONENTS
   MC

@@ -76,4 +76,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeChadArchTargetMC() {
                                         createChadArchMCInstPrinter);
   TargetRegistry::RegisterMCCodeEmitter(TheChadArchTarget,
                                         createChadArchMCCodeEmitter);
+  TargetRegistry::RegisterMCAsmBackend(TheChadArchTarget,
+                                       createChadArchAsmBackend);
 }
