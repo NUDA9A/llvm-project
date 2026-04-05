@@ -9,6 +9,7 @@ tablegen(LLVM ChadArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM ChadArchGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM ChadArchGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM ChadArchGenAsmWriter.inc -gen-asm-writer)
+tablegen(LLVM ChadArchGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(ChadArchCommonTableGen)
 
