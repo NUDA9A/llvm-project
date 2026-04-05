@@ -1,6 +1,8 @@
 #ifndef LLVM_LIB_TARGET_CHADARCH_MCTARGETDESC_CHADARCHMCTARGETDESC_H
 #define LLVM_LIB_TARGET_CHADARCH_MCTARGETDESC_CHADARCHMCTARGETDESC_H
 
+#include <memory>
+
 namespace llvm {
 class MCCodeEmitter;
 class MCContext;
@@ -18,6 +20,8 @@ MCAsmBackend *createChadArchAsmBackend(const Target &T,
                                        const MCSubtargetInfo &STI,
                                        const MCRegisterInfo &MRI,
                                        const MCTargetOptions &Options);
+std::unique_ptr<MCObjectTargetWriter>
+createChadArchELFObjectWriter(bool Is64Bit, uint8_t OSABI);
 } // namespace llvm
 
 #define GET_REGINFO_ENUM
